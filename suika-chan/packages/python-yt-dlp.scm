@@ -10,11 +10,11 @@
     (name "python-yt-dlp")
     (version "2026.3.17")
     (source (origin
-     (method url-fetch)
-     (uri (pypi-uri "yt_dlp" version))
-     (sha256 (base32 "1jfjaz0dxndpb2v6pp4q2fzz13yasyb1ahhfwz7zq7rzacfs6yms"))))
-    (arguments (list #:tests? #f))
+      (method url-fetch)
+      (uri (pypi-uri "yt_dlp" version))
+      (sha256 (base32 "1jfjaz0dxndpb2v6pp4q2fzz13yasyb1ahhfwz7zq7rzacfs6yms"))))
     (build-system pyproject-build-system)
+    (arguments (list #:tests? #f))
     (native-inputs (list
       python-autopep8
       python-hatchling
