@@ -1,4 +1,5 @@
 (define-module (suika-chan packages cursor)
+  #:use-module (gnu packages)
   #:use-module (guix packages)
   #:use-module (guix download)
   #:use-module (guix gexp)
