@@ -40,4 +40,31 @@
     (synopsis "Docker: Accelerated Container Application Development")
     (description "Includes the containerd, containerd-shim-runc-v2, ctr, docker, dockerd, docker-init, docker-proxy and runc binaries inside /bin.")
     (license license:asl2.0)))
+(define-public docker-compose-binary
+  (package
+    (name "docker-compose-binary")
+    (version "5.1.4")
+    (source (origin
+      (method url-fetch)
+      (uri (string-append
+        "https://github.com/docker/compose/releases/download/v"
+        version
+        "/docker-compose-linux-x86_64"))
+      (sha256 (base32 "1i7hznp4aw4hpjmlvz53ikjwmnh1rikbk15f5xsdnfb6wzbhicik"))))
+    (build-system trivial-build-system)
+    (arguments (list
+      #:modules '((guix build utils))
+      #:builder #~(begin
+        (use-modules (guix build utils))
+        (let* (
+          (out (assoc-ref %outputs "out"))
+          (source (assoc-ref %build-inputs "source"))
+          (dest (string-append out "/usr/lib/docker/cli-plugins")))
+          (mkdir-p dest)
+          (copy-file source (string-append dest "/docker-compose"))
+          (chmod (string-append dest "/docker-compose") #o755)))))
+    (home-page "https://github.com/docker/compose")
+    (synopsis "Docker Compose: Define and run multi-container applications with Docker")
+    (description "Docker Compose is a tool for running multi-container applications on Docker defined using the Compose file format.")
+    (license license:asl2.0)))
 

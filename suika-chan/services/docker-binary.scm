@@ -4,8 +4,7 @@
   #:use-module (gnu services shepherd)
   #:use-module (gnu system shadow)
   #:use-module (guix gexp)
-  #:use-module (suika-chan packages docker-binary)
-  #:export (docker-binary-service-type))
+  #:use-module (suika-chan packages docker-binary))
 (define docker-binary-shepherd-service
   (shepherd-service
     (documentation "Docker daemon (binary).")
@@ -26,7 +25,7 @@
       #:pid-file "/var/run/docker.pid"
       #:log-file "/var/log/docker.log"))
     (stop #~(make-kill-destructor))))
-(define docker-binary-service-type
+(define-public docker-binary-service-type
   (service-type
     (name 'docker-binary)
     (description "Provide capability to run Docker application bundles in Docker containers (binary).")
