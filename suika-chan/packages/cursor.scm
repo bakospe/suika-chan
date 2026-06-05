@@ -1,8 +1,8 @@
 (define-module (suika-chan packages cursor)
   #:use-module (gnu packages)
+  #:use-module (guix gexp)
   #:use-module (guix packages)
   #:use-module (guix download)
-  #:use-module (guix gexp)
   #:use-module (nonguix build-system chromium-binary))
 (define-public cursor
   (package
