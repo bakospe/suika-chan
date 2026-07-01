@@ -24,7 +24,6 @@
       (sha256 (base32 "1nfpp1mhsymrd6m346prfbhrv5ibnj4z4y8iba2v7ad08hfcsrji"))))
     (build-system binary-build-system)
     (arguments (list
-      #:validate-runpath? #f
       #:phases #~(modify-phases %standard-phases
         (add-after 'install 'verify-and-symlink-bin
           (lambda _
@@ -36,7 +35,7 @@
               (gpg (string-append gnupg "/bin/gpg")))
               (setenv "GNUPGHOME" "/tmp")
               (invoke gpg "--import" pubkey)
-              (invoke gpg "--keyring" pubkey "--verify" sig source)
+              (invoke gpg "--verify" sig source)
               (symlink
                 (string-append #$output "/usr/bin")
                 (string-append #$output "/bin"))))))))
