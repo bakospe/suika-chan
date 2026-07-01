@@ -1,4 +1,5 @@
 (define-module (suika-chan services docker-binary)
+  #:use-module (gnu packages bash)
   #:use-module (gnu packages linux)
   #:use-module (gnu services)
   #:use-module (gnu services shepherd)
@@ -17,7 +18,16 @@
       udev
       user-processes))
     (start #~(make-forkexec-constructor
-      (list (string-append #$docker-binary "/bin/dockerd"))
+      (list
+        (string-append #$bash "/bin/bash")
+        "-c"
+        (string-append
+          "if [ ! -e /sys/fs/cgroup/dockerd ]; then "
+          (string-append #$libcgroup "/bin/cgcreate")
+          " -g cpuset,cpu,io,memory,hugetlb,pids,misc,dmem:/dockerd; fi && exec "
+          (string-append #$libcgroup "/bin/cgexec")
+          " -g cpuset,cpu,io,memory,hugetlb,pids,misc,dmem:/dockerd "
+          (string-append #$docker-binary "/bin/dockerd")))
       #:environment-variables (list
         (string-append "PATH="
           #$docker-binary "/bin:"
