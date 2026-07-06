@@ -1,6 +1,7 @@
 (define-module (suika-chan packages eigenwallet)
   #:use-module (gnu packages)
   #:use-module (gnu packages commencement)
+  #:use-module (gnu packages gnome)
   #:use-module (gnu packages gnupg)
   #:use-module (gnu packages gtk)
   #:use-module (gnu packages webkit)
@@ -58,6 +59,7 @@
         (sha256 (base32 "1v9r7fk0sv0j9c3qgjq6icz57mvrdrgpxba1bibjgnhxrnf11bj5")))))
     (propagated-inputs (list
       gcc-toolchain
+      gsettings-desktop-schemas
       gtk+
       webkitgtk-for-gtk3))
     (home-page "https://eigenwallet.org/")
