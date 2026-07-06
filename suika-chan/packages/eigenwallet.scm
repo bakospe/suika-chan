@@ -4,6 +4,7 @@
   #:use-module (gnu packages gnome)
   #:use-module (gnu packages gnupg)
   #:use-module (gnu packages gtk)
+  #:use-module (gnu packages nss)
   #:use-module (gnu packages webkit)
   #:use-module (guix gexp)
   #:use-module (guix packages)
@@ -61,6 +62,7 @@
       gcc-toolchain
       gsettings-desktop-schemas
       gtk+
+      nss-certs
       webkitgtk-for-gtk3))
     (home-page "https://eigenwallet.org/")
     (synopsis "Swap BTC->XMR with protocol guaranteed safety")
