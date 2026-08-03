@@ -9,11 +9,11 @@
 (define-public python-yt-dlp
   (package
     (name "python-yt-dlp")
-    (version "2026.3.17")
+    (version "2026.7.4")
     (source (origin
       (method url-fetch)
       (uri (pypi-uri "yt_dlp" version))
-      (sha256 (base32 "1jfjaz0dxndpb2v6pp4q2fzz13yasyb1ahhfwz7zq7rzacfs6yms"))))
+      (sha256 (base32 "0cj43b9b4fvvh07vw0slibyyacnz6598203g3399sypq0hs8355h"))))
     (build-system pyproject-build-system)
     (arguments (list #:tests? #f))
     (native-inputs (list
