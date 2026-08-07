@@ -1,8 +1,10 @@
 (define-module (suika-chan packages python-yt-dlp)
   #:use-module (gnu packages)
   #:use-module (gnu packages check)
+  #:use-module (gnu packages nss)
   #:use-module (gnu packages python-build)
   #:use-module (gnu packages python-check)
+  #:use-module (gnu packages tls)
   #:use-module (guix packages)
   #:use-module (guix download)
   #:use-module (guix build-system pyproject))
@@ -21,6 +23,9 @@
       python-hatchling
       python-pytest
       python-pytest-rerunfailures))
+    (propagated-inputs (list
+      nss-certs
+      openssl))
     (home-page #f)
     (synopsis "A feature-rich command-line audio/video downloader")
     (description "This package provides a feature-rich command-line audio/video downloader.")

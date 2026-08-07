@@ -1,5 +1,6 @@
 (define-module (suika-chan packages discord)
   #:use-module (gnu packages)
+  #:use-module (gnu packages gnome)
   #:use-module (guix gexp)
   #:use-module (guix packages)
   #:use-module (guix download)
@@ -29,6 +30,8 @@
             (symlink
               (string-append #$output "/usr/bin")
               (string-append #$output "/bin")))))))
+    (propagated-inputs (list
+      adwaita-icon-theme))
     (home-page "https://discord.com/")
     (synopsis "Discord - Talk, Play, Hang Out")
     (description "Discord is designed for gaming and great for just chilling with friends or building a community.")

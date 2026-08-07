@@ -1,9 +1,12 @@
 (define-module (suika-chan packages cursor)
   #:use-module (gnu packages)
+  #:use-module (gnu packages gnome)
+  #:use-module (gnu packages version-control)
   #:use-module (guix gexp)
   #:use-module (guix packages)
   #:use-module (guix download)
-  #:use-module (nonguix build-system chromium-binary))
+  #:use-module (nonguix build-system chromium-binary)
+  #:use-module (suika-chan packages xdg-open-hack))
 (define-public cursor
   (package
     (name "cursor")
@@ -28,6 +31,10 @@
             (symlink
               (string-append #$output "/usr/share/cursor/cursor")
               (string-append #$output "/bin/cursor")))))))
+    (propagated-inputs (list
+      adwaita-icon-theme
+      git
+      xdg-open-hack))
     (home-page "https://cursor.com/")
     (synopsis "Cursor: The best coding agent")
     (description "Built to make you extraordinarily productive, Cursor is the best coding agent.")

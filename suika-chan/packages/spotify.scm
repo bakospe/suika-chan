@@ -1,9 +1,13 @@
 (define-module (suika-chan packages spotify)
   #:use-module (gnu packages)
+  #:use-module (gnu packages fonts)
+  #:use-module (gnu packages gnome)
+  #:use-module (gnu packages gtk)
   #:use-module (guix gexp)
   #:use-module (guix packages)
   #:use-module (guix download)
-  #:use-module (nonguix build-system chromium-binary))
+  #:use-module (nonguix build-system chromium-binary)
+  #:use-module (suika-chan packages libayatana))
 (define-public spotify
   (package
     (name "spotify")
@@ -24,6 +28,17 @@
             (symlink
               (string-append #$output "/usr/bin")
               (string-append #$output "/bin")))))))
+    (propagated-inputs (list
+      adwaita-icon-theme
+      font-dejavu
+      font-google-noto
+      font-google-noto-emoji
+      font-google-noto-sans-cjk
+      font-google-noto-sans-hebrew
+      libayatana-appindicator
+      libayatana-ido
+      libayatana-indicator
+      libdbusmenu))
     (home-page "https://spotify.com/")
     (synopsis "Spotify: Music and Podcasts")
     (description "Spotify for Linux is a labor of love from our engineers that wanted to listen to Spotify on their Linux development machines.")
