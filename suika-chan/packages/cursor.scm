@@ -10,16 +10,16 @@
 (define-public cursor
   (package
     (name "cursor")
-    (version "3.9.16")
+    (version "3.15.6")
     (source (origin
       (method url-fetch)
       (uri (string-append
         "https://downloads.cursor.com/production/"
-        "042b3c1a4c53f2c3808067f519fbfc67b72cad8b"
+        "a1f686545fd0ce8917bbd2449f733551a9bce420"
         "/linux/x64/deb/amd64/deb/cursor_"
         version
         "_amd64.deb"))
-      (sha256 (base32 "17rmans6z0rclzs57vp2xbqy80dw97y7ksfv0i4xplr75nnvhpj6"))))
+      (sha256 (base32 "1rz9gas5lgcbayj4613wx65sqwb4ir38apcrxpgvbxw7dk89f7sv"))))
     (supported-systems '("x86_64-linux"))
     (build-system chromium-binary-build-system)
     (arguments (list
