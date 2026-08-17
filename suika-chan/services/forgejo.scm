@@ -7,12 +7,18 @@
   #:use-module (guix gexp)
   #:use-module (suika-chan packages forgejo)
   #:export (forgejo-configuration))
-(define %forgejo-home "/home/forgejo")
+(define %forgejo-user "forgejo")
+(define %forgejo-group %forgejo-user)
+(define %forgejo-home (string-append "/home/" %forgejo-user))
 (define %forgejo-state-dir "/var/lib/forgejo")
+(define %forgejo-config-file (string-append %forgejo-state-dir "/custom/conf/app.ini"))
 (define-configuration forgejo-configuration
-  (environment-variables
-    (list '())
-    "Env vars seen by the Forgejo web process")
+  (server-http-port
+    (integer 3000)
+    "FORGEJO__server__HTTP_PORT")
+  (server-root-url
+    string
+    "FORGEJO__server__ROOT_URL")
   (no-serialization))
 (define (forgejo-shepherd-service config)
   (shepherd-service
@@ -23,24 +29,42 @@
       (list
         #$(file-append forgejo "/bin/forgejo")
         "web")
-      #:environment-variables (cons*
+      #:environment-variables (list
         (string-append "PATH="
           #$(file-append git "/bin") ":"
           #$(file-append git-lfs "/bin"))
         (string-append "HOME=" #$%forgejo-home)
-        (string-append "FORGEJO_WORK_DIR=" #$%forgejo-state-dir)
-        (list #$@(forgejo-configuration-environment-variables config)))
-      #:user "forgejo"
-      #:group "forgejo"))
+        (string-append "FORGEJO_WORK_DIR=" #$%forgejo-state-dir))
+      #:user #$%forgejo-user
+      #:group #$%forgejo-group))
     (stop #~(make-kill-destructor))))
 (define (forgejo-activation config)
   #~(begin
       (use-modules (guix build utils))
-      (let (
-        (dir #$%forgejo-state-dir)
-        (user (getpwnam "forgejo")))
-        (mkdir-p dir)
-        (chown dir (passwd:uid user) (passwd:gid user)))))
+      (let* (
+        (state-dir #$%forgejo-state-dir)
+        (config-file #$%forgejo-config-file)
+        (config-dir (dirname config-file))
+        (user (getpwnam #$%forgejo-user))
+        (uid (passwd:uid user))
+        (gid (passwd:gid user)))
+        (mkdir-p state-dir)
+        (chown state-dir uid gid)
+        (mkdir-p config-dir)
+        (chown config-dir uid gid)
+        (unless (file-exists? config-file)
+          (call-with-output-file config-file
+            (lambda (port)
+              (format
+                port
+                "[server]
+HTTP_PORT = ~a
+ROOT_URL = ~a
+"
+                #$(forgejo-configuration-server-http-port config)
+                #$(forgejo-configuration-server-root-url config)))))
+        (chown config-file uid gid)
+        (chmod config-file #o644))))
 (define-public forgejo-service-type
   (service-type
     (name 'forgejo)
@@ -48,16 +72,15 @@
     (extensions (list
       (service-extension account-service-type (const (list
         (user-group
-          (name "forgejo")
+          (name %forgejo-user)
           (system? #t))
         (user-account
-          (name "forgejo")
-          (group "forgejo")
+          (name %forgejo-user)
+          (group %forgejo-group)
           (home-directory %forgejo-home)
           (system? #t)))))
       (service-extension activation-service-type forgejo-activation)
       (service-extension shepherd-root-service-type
         (lambda (config)
-          (list (forgejo-shepherd-service config))))))
-    (default-value (forgejo-configuration))))
+          (list (forgejo-shepherd-service config))))))))
 
