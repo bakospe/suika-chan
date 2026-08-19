@@ -1,4 +1,4 @@
-(define-module (suika-chan packages code)
+(define-module (suika-chan packages vscode)
   #:use-module (gnu packages)
   #:use-module (gnu packages tls)
   #:use-module (gnu packages version-control)
@@ -6,9 +6,9 @@
   #:use-module (guix packages)
   #:use-module (guix download)
   #:use-module (nonguix build-system chromium-binary))
-(define-public code
+(define-public vscode
   (package
-    (name "code")
+    (name "vscode")
     (version "1.134.0-1787078834")
     (source (origin
       (method url-fetch)
