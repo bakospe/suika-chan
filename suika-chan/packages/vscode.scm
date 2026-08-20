@@ -1,6 +1,7 @@
 (define-module (suika-chan packages vscode)
   #:use-module (gnu packages)
   #:use-module (gnu packages nss)
+  #:use-module (gnu packages ssh)
   #:use-module (gnu packages tls)
   #:use-module (gnu packages version-control)
   #:use-module (guix gexp)
@@ -34,6 +35,7 @@
     (propagated-inputs (list
       git
       nss-certs
+      openssh
       openssl))
     (home-page "https://code.visualstudio.com/")
     (synopsis "Visual Studio Code - The open source AI code editor")
