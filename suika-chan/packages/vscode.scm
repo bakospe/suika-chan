@@ -1,5 +1,6 @@
 (define-module (suika-chan packages vscode)
   #:use-module (gnu packages)
+  #:use-module (gnu packages nss)
   #:use-module (gnu packages tls)
   #:use-module (gnu packages version-control)
   #:use-module (guix gexp)
@@ -32,6 +33,7 @@
               (string-append #$output "/bin/code")))))))
     (propagated-inputs (list
       git
+      nss-certs
       openssl))
     (home-page "https://code.visualstudio.com/")
     (synopsis "Visual Studio Code - The open source AI code editor")
