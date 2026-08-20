@@ -4,14 +4,15 @@
 (define-public devcontainer-operating-system
   (operating-system
     (host-name "compose")
-    (services (list
-      (service syslog-service-type)
+    (services (cons
       (service openssh-service-type (openssh-configuration
         (port-number 2222)
         (password-authentication? #f)
         (challenge-response-authentication? #f)
+        (permit-root-login #t)
         (authorized-keys `(
-          ("root" ,(local-file (in-vicinity (getcwd) "authorized_keys")))))))))
+          ("root" ,(local-file (in-vicinity (getcwd) "authorized_keys")))))))
+      %base-services))
     (file-systems %base-file-systems)
     (bootloader (bootloader-configuration
       (bootloader grub-bootloader)
