@@ -39,7 +39,7 @@
         (call-with-output-file config-file
           (lambda (port)
             (display "version: 0.1\n" port)))
-        (chmod config-file #o555))))
+        (chmod config-file #o444))))
 (define-public docker-registry-service-type
   (service-type
     (name 'docker-registry)
