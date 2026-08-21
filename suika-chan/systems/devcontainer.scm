@@ -1,17 +1,21 @@
 (define-module (suika-chan systems devcontainer)
   #:use-module (gnu)
   #:use-module (gnu packages commencement)
+  #:use-module (gnu packages tls)
+  #:use-module (gnu packages version-control)
   #:use-module (gnu services ssh))
 (define-public devcontainer-operating-system
   (operating-system
-    (host-name "compose")
+    (host-name "devcontainer")
     (users (cons
       (user-account
         (name "app")
         (group "users"))
       %base-user-accounts))
-    (packages (cons
+    (packages (cons*
       gcc-toolchain
+      git
+      openssl
       %base-packages))
     (services (cons*
       (service openssh-service-type (openssh-configuration
