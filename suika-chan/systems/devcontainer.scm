@@ -19,7 +19,7 @@
       %base-packages))
     (services (cons*
       (service openssh-service-type (openssh-configuration
-        (port-number 2222)
+        (port-number (or (and=> (getenv "DEVCONTAINER_SSH_PORT") string->number) 2222))
         (password-authentication? #f)
         (challenge-response-authentication? #f)
         (authorized-keys `(
