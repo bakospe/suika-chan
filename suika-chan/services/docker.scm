@@ -48,5 +48,6 @@
       (service-extension activation-service-type docker-registry-activation)
       (service-extension shepherd-root-service-type
         (lambda (config)
-          (list (docker-registry-shepherd-service config))))))))
+          (list (docker-registry-shepherd-service config))))))
+    (default-value (docker-registry-configuration))))
 
