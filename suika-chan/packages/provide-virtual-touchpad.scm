@@ -8,7 +8,7 @@
 (define-public provide-virtual-touchpad
   (package
     (name "provide-virtual-touchpad")
-    (version "0.0.1")
+    (version "0.0.2")
     (source #f)
     (build-system trivial-build-system)
     (arguments (list
@@ -23,7 +23,7 @@
           (call-with-output-file dest
             (lambda (port)
               (display
-                "#!/usr/bin/env python3
+                "#!/usr/bin/env python
 import os
 from contextlib import suppress
 from evdev import InputDevice,UInput,ecodes
@@ -70,8 +70,8 @@ for z in src.read_loop():
                 port)))
           (chmod dest #o555)))))
     (propagated-inputs (list
-      python
-      python-evdev))
+      python-evdev
+      python-wrapper))
     (home-page #f)
     (synopsis "Provide Virtual TouchPad")
     (description "Makes the touchpad behave like a touchpad rather than a drawing tablet after an evdev passthrough.")
