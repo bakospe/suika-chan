@@ -11,8 +11,6 @@
     (documentation "Docker daemon (binary).")
     (provision '(dockerd-binary))
     (requirement '(
-      dbus-system
-      elogind
       file-system-/sys/fs/cgroup
       networking
       udev
