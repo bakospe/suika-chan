@@ -1,4 +1,5 @@
 (define-module (suika-chan services forgejo)
+  #:use-module (gnu packages base)
   #:use-module (gnu packages version-control)
   #:use-module (gnu services)
   #:use-module (gnu services configuration)
@@ -45,13 +46,12 @@
         (state-dir #$%forgejo-state-dir)
         (config-file #$%forgejo-config-file)
         (config-dir (dirname config-file))
-        (user (getpwnam #$%forgejo-user))
-        (uid (passwd:uid user))
-        (gid (passwd:gid user)))
+        (user #$%forgejo-user)
+        (group #$%forgejo-group)
+        (chown #$(file-append coreutils "/bin/chown")))
         (mkdir-p state-dir)
-        (chown state-dir uid gid)
+        (invoke chown "-R" (string-append user ":" group) state-dir)
         (mkdir-p config-dir)
-        (chown config-dir uid gid)
         (unless (file-exists? config-file)
           (call-with-output-file config-file
             (lambda (port)
@@ -63,7 +63,7 @@ ROOT_URL = ~a
 "
                 #$(forgejo-configuration-server-http-port config)
                 #$(forgejo-configuration-server-root-url config)))))
-        (chown config-file uid gid)
+        (invoke chown "-R" (string-append user ":" group) config-dir)
         (chmod config-file #o644))))
 (define-public forgejo-service-type
   (service-type
