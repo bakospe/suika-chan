@@ -8,13 +8,13 @@
 (define-public guix-infra
   (package
     (name "guix-infra")
-    (version "0.0.1")
+    (version "0.0.2")
     (source (origin
       (method git-fetch)
       (uri (git-reference
         (url "https://github.com/SecondCosmicV/guix-infra.git")
         (commit version)))
-      (sha256 (base32 "1637j7llyi1rqwbijd0zid6qqv5fj1cfqn8dcab8prks9ik5zm9c"))))
+      (sha256 (base32 "1qc4fm6m3v97ixz559hdl1zyg35zcykmrc1m3rlb774hhbdgnk9h"))))
     (build-system trivial-build-system)
     (arguments (list
       #:modules '((guix build utils))
