@@ -6,7 +6,7 @@
 (define-public devcontainer-up
   (package
     (name "devcontainer-up")
-    (version "0.0.2")
+    (version "0.0.3")
     (source #f)
     (build-system trivial-build-system)
     (arguments (list
@@ -42,11 +42,17 @@
                 (string-append
                   "#!/usr/bin/env bash
 set -xe
-export DEVCONTAINER_SSH_PORT=$PORT
+PORT=${PORT:-2222}
+if [ ! -e authorized_keys ]; then
+    exit 1
+fi
 if [ $# -gt 0 ]; then
     QUICK_MODE=0
 else
     QUICK_MODE=1
+    if ! docker image inspect devcontainer-quick > /dev/null 2>&1; then
+        docker-build devcontainer-quick " quick-dest "
+    fi
 fi
 if [ $QUICK_MODE -eq 0 ]; then
     VSCODE_SERVER_DIR_PATH=$(pwd)/.vscode-server
@@ -65,15 +71,18 @@ fi
 if [ ! -e ~/.git-credentials ]; then
     touch ~/.git-credentials
 fi
-exec sudo $(guix system container \\
-    --network \\
-    --expose=/etc/ssh/ssh_host_ed25519_key \\
-    --expose=$HOME/.gitconfig=/home/app/.gitconfig \\
-    --expose=$HOME/.git-credentials=/home/app/.git-credentials \\
-    --share=$VSCODE_SERVER_DIR_PATH=/home/app/.vscode-server \\
-    --share=$WORKSPACE_DIR_HOST_PATH=$WORKSPACE_DIR_GUEST_PATH \\
+exec docker run \\
+    -it \\
+    -v /etc/ssh/ssh_host_ed25519_key:/etc/ssh/ssh_host_ed25519_key:ro \\
+    -v $PWD/authorized_keys:/home/app/.ssh/authorized_keys:ro \\
+    -v $HOME/.gitconfig:/home/app/.gitconfig:ro \\
+    -v $HOME/.git-credentials:/home/app/.git-credentials:ro \\
+    -v $VSCODE_SERVER_DIR_PATH:/home/app/.vscode-server \\
+    -v $WORKSPACE_DIR_HOST_PATH:$WORKSPACE_DIR_GUEST_PATH \\
+    -p $PORT:2222 \\
+    --rm \\
     \"$@\" \\
-    $(if [ $QUICK_MODE -eq 1 ]; then echo " quick-dest "; fi))
+    $(if [ $QUICK_MODE -eq 1 ]; then echo devcontainer-quick; fi)
 ")
                 port)))
           (chmod dest #o555)))))
