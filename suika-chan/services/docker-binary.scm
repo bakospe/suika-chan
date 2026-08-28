@@ -40,6 +40,9 @@
     (extensions (list
       (service-extension profile-service-type (const (list docker-binary)))
       (service-extension shepherd-root-service-type (const (list docker-binary-shepherd-service)))
+      (service-extension special-files-service-type (const (list (list
+        "/usr/lib/docker/cli-plugins/docker-compose"
+        (file-append docker-compose-binary "/usr/lib/docker/cli-plugins/docker-compose")))))
       (service-extension account-service-type (const (list
         (user-group
           (name "docker")
