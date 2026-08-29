@@ -93,7 +93,7 @@
         (operating-system-file-systems base-operating-system))))))
 (define-public docker-base-operating-system
   (operating-system
-    (initrd #f)
+    (initrd-modules '())
     (host-name "docker-base")
     (users (cons
       (user-account
