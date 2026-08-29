@@ -5,6 +5,8 @@
   #:use-module (gnu packages admin)
   #:use-module (gnu packages commencement)
   #:use-module (gnu packages compression)
+  #:use-module (gnu packages curl)
+  #:use-module (gnu packages gnupg)
   #:use-module (gnu packages linux)
   #:use-module (gnu packages python)
   #:use-module (gnu packages rsync)
@@ -36,8 +38,10 @@
           (plain-file-content %sudoers-specification)
           "app ALL=(ALL) NOPASSWD: ALL\n")))
       (packages (cons*
+        curl
         fastfetch-minimal
         git
+        gnupg
         guix-infra
         htop
         iptables
@@ -62,6 +66,11 @@
                 "iptables -A INPUT -i lo -j ACCEPT && "
                 "iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT"))
               #t)))))
+        (extra-special-file
+          "/home/app/.gnupg/gpg.conf"
+          (plain-file
+            "gpg.conf"
+            "pinentry-mode loopback\nno-symkey-cache\n"))
         (modify-services (operating-system-user-services base-operating-system)
           (openssh-service-type
             config => (openssh-configuration
