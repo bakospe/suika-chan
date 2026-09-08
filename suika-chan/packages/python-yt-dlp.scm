@@ -5,17 +5,18 @@
   #:use-module (gnu packages python-build)
   #:use-module (gnu packages python-check)
   #:use-module (gnu packages tls)
+  #:use-module (gnu packages video)
   #:use-module (guix packages)
   #:use-module (guix download)
   #:use-module (guix build-system pyproject))
 (define-public python-yt-dlp
   (package
     (name "python-yt-dlp")
-    (version "2026.7.4")
+    (version "2026.8.19")
     (source (origin
       (method url-fetch)
       (uri (pypi-uri "yt_dlp" version))
-      (sha256 (base32 "0cj43b9b4fvvh07vw0slibyyacnz6598203g3399sypq0hs8355h"))))
+      (sha256 (base32 "1w8a9rpwh3h7syva5053bwm3kxhqy41pji74g2rncp53rr43w8cy"))))
     (build-system pyproject-build-system)
     (arguments (list #:tests? #f))
     (native-inputs (list
@@ -24,6 +25,7 @@
       python-pytest
       python-pytest-rerunfailures))
     (propagated-inputs (list
+      ffmpeg
       nss-certs
       openssl))
     (home-page #f)
