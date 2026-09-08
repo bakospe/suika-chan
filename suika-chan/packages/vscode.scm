@@ -11,16 +11,16 @@
 (define-public vscode
   (package
     (name "vscode")
-    (version "1.134.0-1787078834")
+    (version "1.136.2-1788561671")
     (source (origin
       (method url-fetch)
       (uri (string-append
         "https://vscode.download.prss.microsoft.com/dbazure/download/stable/"
-        "110a328ea54b42367b803ec53ee0bf52ef26b419"
+        "88e44fa0e00b08f7758b4f6d05632e4fd5e4df6f"
         "/code_"
         version
         "_amd64.deb"))
-      (sha256 (base32 "06czskw2kngyalvadlrihf9jkdmyzpqjyrl9sff0gpsk5pss5lyw"))))
+      (sha256 (base32 "1h5h8aaqi21xl3m53khy70zw9p43pqznx04x7glchrizf9pj54r4"))))
     (supported-systems '("x86_64-linux"))
     (build-system chromium-binary-build-system)
     (arguments (list
