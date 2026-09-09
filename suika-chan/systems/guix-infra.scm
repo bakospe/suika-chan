@@ -135,7 +135,10 @@
         ("LD_LIBRARY_PATH" . "/lib64")))
       (extra-special-file "/lib64" "/run/current-system/profile/lib")
       (extra-special-file "/usr/lib64" "/lib64")
-      (operating-system-user-services docker-base-operating-system)))))
+      (modify-services (operating-system-user-services docker-base-operating-system)
+        (guix-service-type config => (guix-configuration
+          (inherit config)
+          (extra-options '("--allow-aslr")))))))))
 (define-public devcontainer-quick-operating-system
   (operating-system
     (inherit devcontainer-operating-system)
