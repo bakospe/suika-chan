@@ -1,9 +1,7 @@
 (define-module (suika-chan packages python-yt-dlp)
   #:use-module (gnu packages)
-  #:use-module (gnu packages check)
   #:use-module (gnu packages nss)
   #:use-module (gnu packages python-build)
-  #:use-module (gnu packages python-check)
   #:use-module (gnu packages tls)
   #:use-module (gnu packages video)
   #:use-module (guix packages)
@@ -20,10 +18,7 @@
     (build-system pyproject-build-system)
     (arguments (list #:tests? #f))
     (native-inputs (list
-      python-autopep8
-      python-hatchling
-      python-pytest
-      python-pytest-rerunfailures))
+      python-hatchling))
     (propagated-inputs (list
       ffmpeg
       nss-certs
