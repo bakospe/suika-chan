@@ -143,6 +143,6 @@
   (operating-system
     (inherit devcontainer-operating-system)
     (packages (cons
-      python
+      python-wrapper
       (operating-system-packages devcontainer-operating-system)))))
 
