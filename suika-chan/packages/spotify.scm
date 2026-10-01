@@ -11,14 +11,14 @@
 (define-public spotify
   (package
     (name "spotify")
-    (version "1.2.92.147.g5b8f9367")
+    (version "1.2.96.518.g366879e1")
     (source (origin
       (method url-fetch)
       (uri (string-append
         "https://repository-origin.spotify.com/pool/non-free/s/spotify-client/spotify-client_"
         version
         "_amd64.deb"))
-      (sha256 (base32 "01g11cg3i2gkqa5v2nrmjp01w3y4fvzha6rdwlzsz52syladw0qr"))))
+      (sha256 (base32 "0bzb2yk3n6ax3nk0wfc6nbkbjig20pm6a1hm0v2f5c62acgmi1hs"))))
     (supported-systems '("x86_64-linux"))
     (build-system chromium-binary-build-system)
     (arguments (list
