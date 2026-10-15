@@ -12,7 +12,7 @@
     (source (origin
       (method git-fetch)
       (uri (git-reference
-        (url "https://github.com/SecondCosmicV/guix-infra.git")
+        (url "https://github.com/bakospe/guix-infra.git")
         (commit version)))
       (sha256 (base32 "0d5j38yrc22h5qzwxgq23jkn3wzdpl27p7qmvxbhajdphcm3f3pc"))))
     (build-system trivial-build-system)
@@ -26,7 +26,7 @@
           (src (string-append source "/src"))
           (bin (string-append out "/bin")))
           (copy-recursively src bin)))))
-    (home-page "https://github.com/SecondCosmicV/guix-infra")
+    (home-page "https://github.com/bakospe/guix-infra")
     (synopsis "Guix-infra")
     (description "CI/CD Guix scripts.")
     (license license:agpl3)))
