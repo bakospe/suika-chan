@@ -1,5 +1,5 @@
 (define-module (suika-chan services docker)
-  #:use-module (gnu packages docker)
+  #:use-module (gnu packages containers)
   #:use-module (gnu services)
   #:use-module (gnu services configuration)
   #:use-module (gnu services shepherd)
