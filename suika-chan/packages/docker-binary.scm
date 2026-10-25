@@ -68,4 +68,34 @@
     (synopsis "Docker Compose: Define and run multi-container applications with Docker")
     (description "Docker Compose is a tool for running multi-container applications on Docker defined using the Compose file format.")
     (license license:asl2.0)))
+(define-public docker-buildx-binary
+  (package
+    (name "docker-buildx-binary")
+    (version "0.38.1")
+    (source (origin
+      (method url-fetch)
+      (uri (string-append
+        "https://github.com/docker/buildx/releases/download/v"
+        version
+        "/buildx-v"
+        version
+        ".linux-amd64"))
+      (sha256 (base32 "1m2srv9h0phh7815zp0lnpkysgyzdk2gscins38vaaq9fpb5qpg2"))))
+    (build-system trivial-build-system)
+    (arguments (list
+      #:modules '((guix build utils))
+      #:builder #~(begin
+        (use-modules (guix build utils))
+        (let* (
+          (out (assoc-ref %outputs "out"))
+          (source (assoc-ref %build-inputs "source"))
+          (target (string-append out "/usr/lib/docker/cli-plugins"))
+          (dest (string-append target "/docker-buildx")))
+          (mkdir-p target)
+          (copy-file source dest)
+          (chmod dest #o555)))))
+    (home-page "https://github.com/docker/buildx")
+    (synopsis "Buildx: Docker CLI plugin for extended build capabilities with BuildKit")
+    (description "Buildx is a Docker CLI plugin for extended build capabilities with BuildKit.")
+    (license license:asl2.0)))
 
