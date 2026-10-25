@@ -1,5 +1,6 @@
 (define-module (suika-chan packages vscode)
   #:use-module (gnu packages)
+  #:use-module (gnu packages gnome)
   #:use-module (gnu packages nss)
   #:use-module (gnu packages ssh)
   #:use-module (gnu packages tls)
@@ -33,6 +34,7 @@
               (string-append #$output "/usr/share/code/bin/code")
               (string-append #$output "/bin/code")))))))
     (propagated-inputs (list
+      adwaita-icon-theme
       git
       nss-certs
       openssh
