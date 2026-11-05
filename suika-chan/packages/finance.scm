@@ -1,5 +1,4 @@
-(define-module (suika-chan packages eigenwallet)
-  #:use-module (gnu packages)
+(define-module (suika-chan packages finance)
   #:use-module (gnu packages commencement)
   #:use-module (gnu packages gnome)
   #:use-module (gnu packages gnupg)

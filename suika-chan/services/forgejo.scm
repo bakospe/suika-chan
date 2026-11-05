@@ -6,7 +6,7 @@
   #:use-module (gnu services shepherd)
   #:use-module (gnu system shadow)
   #:use-module (guix gexp)
-  #:use-module (suika-chan packages forgejo)
+  #:use-module (suika-chan packages version-control)
   #:export (forgejo-configuration))
 (define %forgejo-user "forgejo")
 (define %forgejo-group %forgejo-user)

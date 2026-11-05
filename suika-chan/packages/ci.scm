@@ -1,5 +1,4 @@
-(define-module (suika-chan packages guix-infra)
-  #:use-module (gnu packages)
+(define-module (suika-chan packages ci)
   #:use-module (guix gexp)
   #:use-module (guix packages)
   #:use-module (guix git-download)

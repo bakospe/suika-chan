@@ -1,5 +1,4 @@
-(define-module (suika-chan packages discord)
-  #:use-module (gnu packages)
+(define-module (suika-chan packages messaging)
   #:use-module (gnu packages gnome)
   #:use-module (guix gexp)
   #:use-module (guix packages)

@@ -1,5 +1,4 @@
-(define-module (suika-chan packages spotify)
-  #:use-module (gnu packages)
+(define-module (suika-chan packages music)
   #:use-module (gnu packages fonts)
   #:use-module (gnu packages gnome)
   #:use-module (gnu packages gtk)
@@ -7,7 +6,7 @@
   #:use-module (guix packages)
   #:use-module (guix download)
   #:use-module (nonguix build-system chromium-binary)
-  #:use-module (suika-chan packages libayatana))
+  #:use-module (suika-chan packages freedesktop))
 (define-public spotify
   (package
     (name "spotify")

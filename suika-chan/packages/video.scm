@@ -1,5 +1,4 @@
-(define-module (suika-chan packages python-yt-dlp)
-  #:use-module (gnu packages)
+(define-module (suika-chan packages video)
   #:use-module (gnu packages nss)
   #:use-module (gnu packages python-build)
   #:use-module (gnu packages tls)

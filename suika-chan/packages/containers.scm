@@ -1,5 +1,4 @@
-(define-module (suika-chan packages docker-binary)
-  #:use-module (gnu packages)
+(define-module (suika-chan packages containers)
   #:use-module (gnu packages base)
   #:use-module (gnu packages compression)
   #:use-module (guix gexp)

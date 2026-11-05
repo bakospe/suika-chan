@@ -1,5 +1,4 @@
-(define-module (suika-chan packages opencode)
-  #:use-module (gnu packages)
+(define-module (suika-chan packages ai)
   #:use-module (gnu packages base)
   #:use-module (gnu packages compression)
   #:use-module (gnu packages elf)

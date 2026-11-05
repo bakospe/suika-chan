@@ -1,5 +1,4 @@
-(define-module (suika-chan packages provide-virtual-touchpad)
-  #:use-module (gnu packages)
+(define-module (suika-chan packages linux)
   #:use-module (gnu packages linux)
   #:use-module (gnu packages python)
   #:use-module (guix gexp)

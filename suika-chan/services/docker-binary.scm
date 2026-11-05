@@ -5,7 +5,7 @@
   #:use-module (gnu services shepherd)
   #:use-module (gnu system shadow)
   #:use-module (guix gexp)
-  #:use-module (suika-chan packages docker-binary))
+  #:use-module (suika-chan packages containers))
 (define docker-binary-shepherd-service
   (shepherd-service
     (documentation "Docker daemon (binary).")

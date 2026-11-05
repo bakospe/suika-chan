@@ -1,5 +1,4 @@
-(define-module (suika-chan packages forgejo)
-  #:use-module (gnu packages)
+(define-module (suika-chan packages version-control)
   #:use-module (guix gexp)
   #:use-module (guix packages)
   #:use-module (guix download)
