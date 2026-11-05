@@ -19,6 +19,7 @@
   #:use-module (gnu machine hetzner)
   #:use-module (guix gexp)
   #:use-module (suika-chan packages guix-infra)
+  #:use-module (suika-chan packages opencode)
   #:use-module (suika-chan services docker-binary))
 (define-public (make-base-vps-operating-system hetzner-server-type)
   (let ((base-operating-system (make-hetzner-os hetzner-server-type)))
@@ -124,6 +125,7 @@
     (packages (cons*
       gcc-toolchain
       git
+      opencode
       openssl
       (operating-system-packages docker-base-operating-system)))
     (services (cons*
@@ -132,6 +134,7 @@
         (password-authentication? #f)
         (challenge-response-authentication? #f)))
       (simple-service 'my-session-environment-service session-environment-service-type '(
+        ("COLORTERM" . "truecolor")
         ("LD_LIBRARY_PATH" . "/lib64")))
       (extra-special-file "/lib64" "/run/current-system/profile/lib")
       (extra-special-file "/usr/lib64" "/lib64")
