@@ -1,6 +1,4 @@
-
 (define-module (suika-chan packages spotify)
-  #:use-module (gnu packages)
   #:use-module (gnu packages fonts)
   #:use-module (gnu packages gnome)
   #:use-module (gnu packages gtk)
@@ -131,7 +129,6 @@
     (home-page "https://spotify.com/")
     (synopsis "Spotify: Music and Podcasts")
     (description
-     "Spotify for Linux is a labor of love from our engineers that wanted
-to listen to Spotify on their Linux development machines.")
+     "Spotify for Linux is a labor of love from our engineers that wanted to listen to Spotify on their Linux development machines.")
     (license #f)))
 
