@@ -91,7 +91,8 @@
             (type "ext4")
             (mount-may-fail? #t)))
         %control-groups
-        (operating-system-file-systems base-operating-system))))))
+        (operating-system-file-systems base-operating-system)))
+      (swap-devices (list (swap-space (target "/swapfile")))))))
 (define-public docker-base-operating-system
   (operating-system
     (initrd-modules '())
