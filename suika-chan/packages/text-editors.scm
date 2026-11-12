@@ -1,4 +1,5 @@
 (define-module (suika-chan packages text-editors)
+  #:use-module (gnu packages fonts)
   #:use-module (gnu packages gnome)
   #:use-module (gnu packages nss)
   #:use-module (gnu packages ssh)
@@ -67,6 +68,11 @@
               (string-append #$output "/bin/code")))))))
     (propagated-inputs (list
       adwaita-icon-theme
+      font-dejavu
+      font-google-noto
+      font-google-noto-emoji
+      font-google-noto-sans-cjk
+      font-google-noto-sans-hebrew
       git
       nss-certs
       openssh
