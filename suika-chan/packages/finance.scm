@@ -13,7 +13,7 @@
 (define-public eigenwallet
   (package
     (name "eigenwallet")
-    (version "4.11.4")
+    (version "5.0.4")
     (source (origin
       (method url-fetch)
       (uri (string-append
@@ -22,7 +22,7 @@
         "/eigenwallet_"
         version
         "_amd64.deb"))
-      (sha256 (base32 "1nfpp1mhsymrd6m346prfbhrv5ibnj4z4y8iba2v7ad08hfcsrji"))))
+      (sha256 (base32 "0xah2vw7dhwsyj0sbv7lqq2c8l8jyxs7fbwdri9gkslv36yyn7xk"))))
     (build-system binary-build-system)
     (arguments (list
       #:phases #~(modify-phases %standard-phases
@@ -56,7 +56,7 @@
           version
           "_amd64.deb.asc"))
         (file-name "sig")
-        (sha256 (base32 "1v9r7fk0sv0j9c3qgjq6icz57mvrdrgpxba1bibjgnhxrnf11bj5")))))
+        (sha256 (base32 "1df8xma445f8vdx896mgz7ynfxf43jry0ykqy0f2abzwcaz9i2jk")))))
     (propagated-inputs (list
       gcc-toolchain
       gsettings-desktop-schemas
