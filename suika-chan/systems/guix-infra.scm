@@ -128,6 +128,7 @@
       git
       opencode
       openssl
+      tmux
       (operating-system-packages docker-base-operating-system)))
     (services (cons*
       (service openssh-service-type (openssh-configuration
