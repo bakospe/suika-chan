@@ -11,6 +11,7 @@
   #:use-module (gnu packages package-management)
   #:use-module (gnu packages python)
   #:use-module (gnu packages rsync)
+  #:use-module (gnu packages ssh)
   #:use-module (gnu packages text-editors)
   #:use-module (gnu packages tls)
   #:use-module (gnu packages tmux)
@@ -22,6 +23,12 @@
   #:use-module (suika-chan packages ai)
   #:use-module (suika-chan packages ci)
   #:use-module (suika-chan services docker-binary))
+(define %base-openssh-configuration
+  (openssh-configuration
+    (openssh openssh-sans-x)
+    (permit-root-login 'prohibit-password)
+    (password-authentication? #f)
+    (extra-content "StreamLocalBindUnlink yes\n")))
 (define-public (make-base-vps-operating-system hetzner-server-type)
   (let ((base-operating-system (make-hetzner-os hetzner-server-type)))
     (operating-system
@@ -75,11 +82,7 @@
             "gpg.conf"
             "pinentry-mode loopback\nno-symkey-cache\n"))
         (modify-services (operating-system-user-services base-operating-system)
-          (openssh-service-type
-            config => (openssh-configuration
-              (inherit config)
-              (password-authentication? #f)
-              (challenge-response-authentication? #f))))))
+          (openssh-service-type config => %base-openssh-configuration))))
       (file-systems (append
         (list
           (file-system
@@ -134,9 +137,8 @@
       (operating-system-packages docker-base-operating-system)))
     (services (cons*
       (service openssh-service-type (openssh-configuration
-        (port-number 2222)
-        (password-authentication? #f)
-        (challenge-response-authentication? #f)))
+        (inherit %base-openssh-configuration)
+        (port-number 2222)))
       (simple-service 'my-session-environment-service session-environment-service-type '(
         ("COLORTERM" . "truecolor")
         ("LD_LIBRARY_PATH" . "/lib64")))
