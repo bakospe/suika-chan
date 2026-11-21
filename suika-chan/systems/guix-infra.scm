@@ -8,6 +8,7 @@
   #:use-module (gnu packages curl)
   #:use-module (gnu packages gnupg)
   #:use-module (gnu packages linux)
+  #:use-module (gnu packages package-management)
   #:use-module (gnu packages python)
   #:use-module (gnu packages rsync)
   #:use-module (gnu packages text-editors)
@@ -49,6 +50,7 @@
         nano
         pigz
         rsync
+        stow
         tmux
         (operating-system-packages base-operating-system)))
       (services (cons*
