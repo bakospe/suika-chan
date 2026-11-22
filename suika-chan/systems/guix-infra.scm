@@ -112,12 +112,16 @@
         (shepherd-service
           (provision '(networking))
           (start #~(lambda _ #t)))))
-      (simple-service 'my-session-environment-service session-environment-service-type '(
-        ("COLORTERM" . "truecolor")
-        ("EDITOR" . "nano")
-        ("LC_COLLATE" . "C")
-        ("LD_LIBRARY_PATH" . "/lib64:/usr/lib/x86_64-linux-gnu")
-        ("PATH" . "/usr/bin:/run/privileged/bin:/run/current-system/profile/bin:/run/current-system/profile/sbin")))
+      (extra-special-file
+        "/etc/profile.d/environment.sh"
+        (plain-file
+          "environment.sh"
+          (string-append
+            "export COLORTERM=truecolor\n"
+            "export EDITOR=nano\n"
+            "export LC_COLLATE=C\n"
+            "export LD_LIBRARY_PATH=/lib64:/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH\n"
+            "export PATH=\"/usr/bin:$PATH\"\n")))
       %base-services))
     (essential-services
       (modify-services
