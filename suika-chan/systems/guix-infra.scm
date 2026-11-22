@@ -107,11 +107,17 @@
         (name "app")
         (group "users"))
       %base-user-accounts))
-    (services (cons
+    (services (cons*
       (simple-service 'dummy-networking shepherd-root-service-type (list
         (shepherd-service
           (provision '(networking))
           (start #~(lambda _ #t)))))
+      (simple-service 'my-session-environment-service session-environment-service-type '(
+        ("COLORTERM" . "truecolor")
+        ("EDITOR" . "nano")
+        ("LC_COLLATE" . "C")
+        ("LD_LIBRARY_PATH" . "/lib64:/usr/lib/x86_64-linux-gnu")
+        ("PATH" . "/usr/bin:/run/privileged/bin:/run/current-system/profile/bin:/run/current-system/profile/sbin")))
       %base-services))
     (essential-services
       (modify-services
@@ -139,9 +145,6 @@
       (service openssh-service-type (openssh-configuration
         (inherit %base-openssh-configuration)
         (port-number 2222)))
-      (simple-service 'my-session-environment-service session-environment-service-type '(
-        ("COLORTERM" . "truecolor")
-        ("LD_LIBRARY_PATH" . "/lib64")))
       (extra-special-file "/lib64" "/run/current-system/profile/lib")
       (extra-special-file "/usr/lib64" "/lib64")
       (modify-services (operating-system-user-services docker-base-operating-system)
