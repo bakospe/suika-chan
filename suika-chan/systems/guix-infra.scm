@@ -107,6 +107,9 @@
         (name "app")
         (group "users"))
       %base-user-accounts))
+    (skeletons (remove
+      (match-lambda ((name _) (string=? name ".bash_profile")))
+      (default-skeletons)))
     (services (cons*
       (simple-service 'dummy-networking shepherd-root-service-type (list
         (shepherd-service
