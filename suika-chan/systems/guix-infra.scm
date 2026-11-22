@@ -121,7 +121,7 @@
             "export EDITOR=nano\n"
             "export LC_COLLATE=C\n"
             "export LD_LIBRARY_PATH=/lib64:/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH\n"
-            "export PATH=\"/usr/bin:$PATH\"\n")))
+            "export PATH=/usr/bin:$PATH\n")))
       %base-services))
     (essential-services
       (modify-services
