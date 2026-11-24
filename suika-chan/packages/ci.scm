@@ -7,13 +7,13 @@
 (define-public guix-infra
   (package
     (name "guix-infra")
-    (version "0.0.13")
+    (version "0.0.14")
     (source (origin
       (method git-fetch)
       (uri (git-reference
         (url "https://github.com/bakospe/guix-infra.git")
         (commit version)))
-      (sha256 (base32 "1rd0lfn2icp1d5whapidf499w2ymb2rrkr7lfy430mfks8vwvl7q"))))
+      (sha256 (base32 "06ps9zrw4wphxr4bjbgycml6ifdwv0ggn1cdjz5wg6v15df6aaq3"))))
     (build-system trivial-build-system)
     (arguments (list
       #:modules '((guix build utils))
