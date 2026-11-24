@@ -14,11 +14,11 @@
 (define-public python-modal
   (package
     (name "python-modal")
-    (version "1.5.2")
+    (version "1.6.4")
     (source (origin
       (method url-fetch)
       (uri (pypi-uri "modal" version))
-      (sha256 (base32 "12h0q19pikbl15slqdzia4vpmwvm9m00cn9qah6bib6cxj1jj3dc"))))
+      (sha256 (base32 "1rmb8cixdz5kzsk8b916n6kj2vpg2rdvxxri6v7b3ns4fkibp51w"))))
     (build-system pyproject-build-system)
     (arguments (list #:tests? #f))
     (native-inputs (list

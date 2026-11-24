@@ -6,11 +6,11 @@
 (define-public python-synchronicity
   (package
     (name "python-synchronicity")
-    (version "0.12.5")
+    (version "0.12.7")
     (source (origin
       (method url-fetch)
       (uri (pypi-uri "synchronicity" version))
-      (sha256 (base32 "1aihwbpqalzbppx7gn57wj26bbs91663nybap5b313k9hlfnpncl"))))
+      (sha256 (base32 "144v73i46ar9qd20n4w51vjj1vd3faacz5vzcfvkrk4pnw7vm1kd"))))
     (build-system pyproject-build-system)
     (arguments (list #:tests? #f))
     (native-inputs (list
